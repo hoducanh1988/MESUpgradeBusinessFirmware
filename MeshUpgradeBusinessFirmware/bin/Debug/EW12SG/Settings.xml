@@ -1,0 +1,27 @@
+﻿<initSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <isWriteManufacturer>false</isWriteManufacturer>
+  <APIP>192.168.88.1</APIP>
+  <SSHUser>root</SSHUser>
+  <SSHPassword>vnpt</SSHPassword>
+  <MACHeader>A06518:A4F4C2:D49AA0:CC7190</MACHeader>
+  <Manufacturer>VNPTT</Manufacturer>
+  <VnptMacCode>A06518=2,A4F4C2=3,D49AA0=4,CC7190=6</VnptMacCode>
+  <BuildTimeStamp>#1 Mon Jun 8 19:12:54 +07 2020</BuildTimeStamp>
+  <LogDirectory>Default</LogDirectory>
+  <Station>ASM-VerifyFirmware</Station>
+  <HardwareVersion>EW12SG000H0001</HardwareVersion>
+  <ModelNumber>EW12SG</ModelNumber>
+  <ProductNumber />
+  <TimeoutTransFWFile>360</TimeoutTransFWFile>
+  <TimeoutCheckMD5>20</TimeoutCheckMD5>
+  <TimeoutUpgradeFirmware>360</TimeoutUpgradeFirmware>
+  <TimeoutFindSSID>30</TimeoutFindSSID>
+  <FirmwareFile>EW12_EW12XG000T0001.tar.gz</FirmwareFile>
+  <Md5Sum>A9A2FC5A306AA927906C122898EE10D6</Md5Sum>
+  <StartNewAPIP>192.168.88.11</StartNewAPIP>
+  <LocalIP>192.168.88.100</LocalIP>
+  <StationID>01</StationID>
+  <Operator>--</Operator>
+  <WifiConnectionTimeOut>20</WifiConnectionTimeOut>
+  <Md5Verify>fb7e220eb01dc15c2c15c9fd581cbc7d</Md5Verify>
+</initSetting>

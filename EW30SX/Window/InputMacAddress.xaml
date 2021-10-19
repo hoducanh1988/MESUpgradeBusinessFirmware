@@ -1,0 +1,47 @@
+﻿<Window x:Class="EW30SX.InputMacAddress"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EW30SX"
+        mc:Ignorable="d"
+        Title="InputMacAddress" Height="250" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+
+    <Window.Resources>
+        <Style TargetType="Border">
+            <Setter Property="UseLayoutRounding" Value="True"/>
+        </Style>
+    </Window.Resources>
+    
+
+    <Border Margin="0,0,8,8" MouseDown="Move" CornerRadius="10" BorderBrush="#007ACC" BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="5" Direction="320" Color="Black" Opacity="0.5" BlurRadius="3"/>
+        </Border.Effect>
+        <Border Background="White"  CornerRadius="10" BorderBrush="Aqua" BorderThickness="1,5,1,3">
+            <Grid>
+                <Image Opacity="0.3" Margin="0,5,40,0" Width="250" Height="220" VerticalAlignment="top" HorizontalAlignment="Right" Source="/Asset/Image/barcode.png"/>
+
+                <StackPanel>
+                    <Grid>
+                        <Label x:Name="lblDut" FontWeight="Bold" Foreground="Black" FontSize="30" Content=""/>
+                        <Border CornerRadius="3" MouseDown="Close" ToolTip="Close" Background="Red" Margin="0,-10,4,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="35" Height="35" BorderBrush="White" BorderThickness="1">
+                            <Label MouseDown="Close" ToolTip="Close" Margin="0,-10,0,0" HorizontalAlignment="Center" FontSize="30" FontWeight="ExtraBlack" Foreground="White" Content="X"/>
+                        </Border>
+                    </Grid>
+
+                    <Label Foreground="Black" Margin="0,0,0,10" FontSize="17" Content="Input Mac Address :" FontWeight="SemiBold"/>
+                    <TextBox Background="Transparent" Opacity="1" Margin="5,0,10,0" KeyDown="TxtMac_KeyDown" x:Name="txtMac" Height="55" FontSize="40" FontWeight="Bold" VerticalContentAlignment="Center" Padding="0,0,0,0" BorderThickness="0,0,0,1" >
+                        <TextBox.Effect>
+                            <DropShadowEffect ShadowDepth="5" Direction="270" Color="Red" Opacity="0.8" BlurRadius="25"/>
+                        </TextBox.Effect>
+                    </TextBox>
+                    <TextBlock x:Name="tbMessage" FontSize="14" TextWrapping="Wrap" Foreground="Red" Text="" Margin="5,10,5,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Border>
+    
+   
+
+</Window>

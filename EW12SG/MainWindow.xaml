@@ -1,0 +1,465 @@
+﻿<Window x:Class="EW12SG.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EW12SG"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1700" Width="1300" WindowStyle="None" AllowsTransparency="True" Background="#333333" WindowStartupLocation="CenterScreen"
+        MouseDown="FrameworkElement_MouseDown" Tag="dragform"
+        >
+
+    <Window.Resources>
+        <local:StringToBooleanConverter x:Key="StringToBooleanConverter" />
+        <local:StringToStringConverter x:Key="StringToStringConverter" />
+
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid>
+                            <Border  Name="Border" Margin="0,0,-4,0" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0" >
+                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2" RecognizesAccessKey="True"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Panel.ZIndex" Value="100"/>
+                                <Setter TargetName="Border" Property="Background" Value="White" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter Property="Panel.ZIndex" Value="100"/>
+                                <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="#a7a8a4"/>
+                                <Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,0" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Border BorderBrush="#1D8EF5" BorderThickness="0.5,0.5,0.5,0.5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+
+
+            <Grid Grid.Row="0">
+                <WrapPanel Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Label Content=" Version 1.0.0.2" Foreground="White" FontSize="15"/>
+                    <Label Margin="30,0,0,0" Content="Build Time 18/08/2021 14:00" Foreground="White" FontSize="15"/>
+                    <Label Margin="30,0,0,0" Content="Copyright of VNPT Technology 2021" Foreground="White" FontSize="15"/>
+                </WrapPanel>
+
+                <Border Background="#333333" MouseDown="FrameworkElement_MouseDown" Tag="imapmanagement" Margin="0,0,120,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="33" Height="35" BorderBrush="White" BorderThickness="1" ToolTip="IMAP Management">
+                    <Grid>
+                        <Polygon Points="5,3 25,3 27,22 25,25 27,29 3,29 5,25 3,22" Stroke="White" StrokeThickness="2" Fill="White"/>
+                        <Image Source="/Asset/Image/internet.png" Width="10" Height="10" Margin="10,-8,12,0" />
+                        <Label Content="IMAP" FontWeight="SemiBold" Foreground="Black" FontSize="8" Margin="0,12,0,0"/>
+                    </Grid>
+                    <!--<Image Source="/Asset/Image/search.png" Width="24" Height="24"/>-->
+                </Border>
+
+                <Border Background="#333333" MouseDown="FrameworkElement_MouseDown" ToolTip="Minimize" Tag="minimizeform" Margin="0,0,40,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="35" Height="35" BorderBrush="White" BorderThickness="1">
+                    <Label Margin="0,-10,0,0" HorizontalAlignment="Center" FontSize="30" FontWeight="ExtraBlack" Foreground="White" Content="-"/>
+                </Border>
+
+                <Border Background="#333333" MouseDown="FrameworkElement_MouseDown" ToolTip="Close" Tag="closeform" Margin="0,0,2,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="35" Height="35" BorderBrush="White" BorderThickness="1">
+                    <Label Margin="0,0,0,0" Height="35" Width="35" MouseDown="FrameworkElement_MouseDown" Tag="closeform" HorizontalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="ExtraBlack" Foreground="White" Content="X"/>
+                </Border>
+
+            </Grid>
+
+
+            <Grid Grid.Row="1">
+                <StackPanel>
+                    <Label  Margin="10,-15,0,0" Foreground="White" FontSize="35" FontWeight="SemiBold" Content="Product: EW12SG"/>
+                    <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-15,0,0">
+                        <Label Foreground="White" FontSize="25" Content="Station: "/>
+                        <Label x:Name="label_AppTitle"  Foreground="White" FontSize="25" FontWeight="SemiBold" RenderTransformOrigin="0,0" Content="Upgrade firmware thương mại"/>
+                    </WrapPanel>
+                </StackPanel>
+
+                <Border MouseDown="FrameworkElement_MouseDown" Tag="viewlog" Margin="0,0,5,0" VerticalAlignment="Center" HorizontalAlignment="Right" BorderBrush="Yellow" BorderThickness="0,0,0,0.4">
+                    <WrapPanel>
+                        <Label MouseDown="FrameworkElement_MouseDown" Tag="viewlog" VerticalAlignment="Bottom" Content="View log directory..." Foreground="Yellow" FontSize="13" Margin="0,0,10,0"/>
+                        <Image MouseDown="FrameworkElement_MouseDown" Tag="viewlog" ToolTip="view log directory" Source="/Asset/Image/folder.png" Width="25" Height="25"/>
+                    </WrapPanel>
+                </Border>
+
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <TabControl Focusable="False" Background="White" Margin="5">
+                    <TabItem x:Name="tabItem_Testing">
+
+                        <TabItem.Header>
+                            <StackPanel>
+                                <TextBlock FontSize="25" FontWeight="SemiBold" Text="RUN ALL"/>
+                            </StackPanel>
+                        </TabItem.Header>
+
+                        <Grid x:Name="grid_main"/>
+
+                    </TabItem>
+
+
+                    <!--TAB SETTING-->
+                    <TabItem x:Name="tabItem_Setting">
+                        <TabItem.Resources>
+
+                            <Style TargetType="Label">
+                                <Setter Property="FontSize" Value="13"/>
+                            </Style>
+
+                            <!--TextBox-->
+                            <Style TargetType="TextBox">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Height" Value="30"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                <Setter Property="Padding" Value="5,0,0,0"/>
+                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsFocused" Value="True">
+                                        <Setter Property="Background" Value="#e1efb6" />
+                                    </Trigger>
+                                    <Trigger Property="IsFocused" Value="False">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                            <Style x:Key="cus_radio" TargetType="RadioButton">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Height" Value="30"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="Margin" Value="20,0,0,0"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsChecked}" Value="true">
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
+                                        <Setter Property="Foreground" Value="Red"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+
+                            <!--Combobox-->
+                            <Style TargetType="ComboBox">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Height" Value="30"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                <Setter Property="Padding" Value="5,0,0,0"/>
+                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                <Setter Property="IsEditable" Value="True"/>
+                            </Style>
+
+                            <!--CheckBox-->
+                            <Style TargetType="CheckBox">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Height" Value="30"/>
+                                <Setter Property="Margin" Value="0,15,0,0"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                <Setter Property="Padding" Value="5,0,0,0"/>
+                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontWeight" Value="Normal"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsChecked}" Value="true">
+                                        <Setter Property="FontWeight" Value="SemiBold"/>
+                                        <Setter Property="Foreground" Value="Red"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+
+                            <!--Button-->
+                            <Style TargetType="Button" x:Key="button_save_setting">
+                                <Setter Property="Width" Value="300"/>
+                                <Setter Property="Height" Value="50"/>
+                                <Setter Property="Background" Value="#555555"/>
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="Margin" Value="0,2,3,0"/>
+                                <Setter Property="FontFamily" Value="Arial"/>
+                                <Setter Property="FontSize" Value="30"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Border x:Name="_border" CornerRadius="10,0,10,0" BorderBrush="#3498DB" BorderThickness="1,2,1,2">
+                                                    <Grid>
+                                                        <Image Margin="30,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="/Asset/Image/save.png" Width="40" Height="40"/>
+                                                    </Grid>
+                                                </Border>
+                                                <ContentPresenter x:Name="buttoncontent" Margin="0,0,-50,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+
+                                            <ControlTemplate.Triggers>
+
+                                                <DataTrigger Binding="{Binding ElementName=buttoncontent, Path=Content}" Value="START">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Foreground" Value="#307782"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=buttoncontent, Path=Content}" Value="STOP">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Setter Property="Foreground" Value="#307782"/>
+                                                </DataTrigger>
+
+                                                <Trigger Property="Button.IsMouseOver" Value="True">
+                                                    <Setter TargetName="_border" Property="Background" Value="Lime" />
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </Trigger>
+                                                <Trigger Property="Button.IsMouseOver" Value="False">
+                                                    <Setter TargetName="_border" Property="Background" Value="White" />
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+
+                                        </ControlTemplate>
+
+                                    </Setter.Value>
+                                </Setter>
+
+                            </Style>
+
+                        </TabItem.Resources>
+
+
+                        <TabItem.Header>
+                            <StackPanel>
+                                <TextBlock FontSize="25" FontWeight="SemiBold" Text="SETTING"/>
+                            </StackPanel>
+                        </TabItem.Header>
+
+                        <Grid x:Name="_gridSetting" Background="White">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="60"/>
+                            </Grid.RowDefinitions>
+
+                            <ScrollViewer Grid.Row="0">
+                                <StackPanel Orientation="Vertical" Margin="20,10,300,10">
+
+
+
+                                    <!--01. STATION-->
+                                    <Label Margin="-20,0,10,0" Foreground="Blue" FontWeight="SemiBold" FontSize="17" 
+                                           Content="CÀI ĐẶT TRẠM TEST"/>
+                                    <!--..........Factory-->
+                                    <!--<Label Content="Tên nhà máy sản xuất:"/>
+                                    <ComboBox x:Name="cbbFactory"
+                                              Text="{Binding Path=Factory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
+                                    <!--..........LineNumber-->
+                                    <!--<Label Content="Chuyền sản xuất:"/>
+                                    <ComboBox x:Name="cbbLine"
+                                              Text="{Binding Path=LineNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
+                                    <!--..........Station-->
+                                    <Label Content="Tên trạm:"/>
+                                    <ComboBox x:Name="cbbStation"
+                                              Text="{Binding Path=Station, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                              SelectionChanged="CbbStation_SelectionChanged"/>
+                                    <!--..........StationID-->
+                                    <Label Content="Số thứ tự trạm:"/>
+                                    <ComboBox x:Name="cbbStationID"
+                                              Text="{Binding Path=StationID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........WorkOrder-->
+                                    <!--<Label Content="Mã lệnh sản xuất:"/>
+                                    <TextBox Text="{Binding Path=WorkOrder, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
+                                    <!--..........Operator-->
+                                    <Label Content="Tên người thao tác:"/>
+                                    <TextBox Text="{Binding Path=Operator, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+                                    <!--02. DUT IMAP-->
+                                    <Label Margin="-20,20,10,0" Foreground="Blue" FontWeight="SemiBold" FontSize="17" 
+                                           Content="CÀI ĐẶT SẢN PHẨM"/>
+                                    <!--..........FileProduct-->
+                                    <!--<Label Content="File quản lý sản phẩm:"/>
+                                    <Grid>
+                                        <TextBox Margin="0,0,105,0" IsReadOnly="True" Text="{Binding Path=ProductFile, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        <Button x:Name="btnBrowserProductFile" Click="BtnBrowserProductFile_Click" HorizontalAlignment="Right" Height="30" Width="100" Content="browser file..." FontSize="14"/>
+                                    </Grid>-->
+                                    <!--..........ProductName-->
+                                    <!--<Label Content="Tên sản phẩm:"/>
+                                    <ComboBox x:Name="cbbProductName"
+                                              Text="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
+                                    <!--..........Menufacturer-->
+                                    <Border>
+                                        <StackPanel>
+                                            <Label Content="Mã Manufacturer:"/>
+                                            <WrapPanel>
+                                                <ComboBox IsEnabled="{Binding Path=isWriteManufacturer, UpdateSourceTrigger=PropertyChanged}" Width="150" x:Name="cbb_manufacturer" Text="{Binding Path=Manufacturer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                                <RadioButton Style="{StaticResource cus_radio}" IsChecked="{Binding Path=isWriteManufacturer, UpdateSourceTrigger=PropertyChanged}" Content="Ghi mã manufacturer"/>
+                                                <RadioButton Content="Không ghi mã manufacturer">
+                                                    <RadioButton.Style>
+                                                        <Style TargetType="RadioButton" BasedOn="{StaticResource cus_radio}">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding Path=isWriteManufacturer}" Value="True">
+                                                                    <Setter Property="IsChecked" Value="False"/>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding Path=isWriteManufacturer}" Value="False">
+                                                                    <Setter Property="IsChecked" Value="True"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </RadioButton.Style>
+                                                </RadioButton>
+                                            </WrapPanel>
+                                        </StackPanel>
+                                    </Border>
+                                    <!--..........MACHeader-->
+                                    <Label Content="Mac Address - Header:"/>
+                                    <TextBox Text="{Binding Path=MACHeader, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........MACCode-->
+                                    <Label Content="Mã phân biệt dải mac"/>
+                                    <TextBox Text="{Binding Path=VnptMacCode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........APIP-->
+                                    <Label Content="Địa chỉ IP mặc định:"/>
+                                    <TextBox Text="{Binding Path=APIP, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                    <!--..........SSHUser-->
+                                    <Label Content="SSH - User:"/>
+                                    <TextBox Text="{Binding Path=SSHUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........SSHPassword-->
+                                    <Label Content="SSH - Password:"/>
+                                    <TextBox Text="{Binding Path=SSHPassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+                                    <!--03. LOG-->
+                                    <StackPanel Visibility="Collapsed">
+                                        <Label Margin="-20,20,10,0" Foreground="Blue" FontWeight="SemiBold" FontSize="17" 
+                                           Content="CÀI ĐẶT LƯU LOG"/>
+                                        <!--..........LogDirectory-->
+                                        <Label Content="Đường dẫn folder lưu log:"/>
+                                        <ComboBox x:Name="cbbLogDir" 
+                                              Text="{Binding Path=LogDirectory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                              SelectionChanged="CbbLogDir_SelectionChanged"/>
+                                    </StackPanel>
+
+
+                                    <!--05. UPGRADE-->
+                                    <Label Margin="-20,20,10,0" Foreground="Blue" FontWeight="SemiBold" FontSize="17" 
+                                           Content="CÀI ĐẶT NÂNG CẤP PHIÊN BẢN FIRMWARE"/>
+                                    <!--..........FirmwareFile-->
+                                    <Label Content="Tên file firmware thương mại:"/>
+                                    <Grid>
+                                        <TextBox Margin="0,0,105,0" IsReadOnly="True" Text="{Binding Path=FirmwareFile, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        <Button x:Name="btnBrowserFirmwareFile" Click="BtnBrowserFirmwareFile_Click" HorizontalAlignment="Right" Height="30" Width="100" Content="browser file..." FontSize="14"/>
+                                    </Grid>
+                                    <!--..........Md5Sum file firmware-->
+                                    <Label Content="Mã Md5Sum file firmware thương mại:"/>
+                                    <TextBox Text="{Binding Path=Md5Sum, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........Timeout - transfer file-->
+                                    <Label Content="Timeout - đẩy file firmware thương mại (sec):"/>
+                                    <TextBox Text="{Binding Path=TimeoutTransFWFile, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........Timeout - check md5-->
+                                    <Label Content="Timeout - kiểm tra mã md5 (sec):"/>
+                                    <TextBox Text="{Binding Path=TimeoutCheckMD5, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........Timeout - upgrade firmware-->
+                                    <Label Content="Timeout - nâng cấp firmware thương mại (sec):"/>
+                                    <TextBox Text="{Binding Path=TimeoutUpgradeFirmware, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........LocalIP-->
+                                    <Label Content="Địa chỉ IP của máy tính:"/>
+                                    <TextBox Text="{Binding Path=LocalIP, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+
+                                    <!--04. VERIFY-->
+                                    <Label Margin="-20,20,10,0" Foreground="Blue" FontWeight="SemiBold" FontSize="17" 
+                                           Content="CÀI ĐẶT XÁC NHẬN PHIÊN BẢN FIRMWARE"/>
+                                    <!--..........ProductNumber-->
+                                    <!--<Label Content="Số quản lý sản phẩm:"/>
+                                    <TextBox IsEnabled="False" Text="{Binding Path=ProductNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
+                                    <!--..........HardwareVersion-->
+                                    <Label Content="Hardware - Version:"/>
+                                    <TextBox Text="{Binding Path=HardwareVersion, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........ModelNumber-->
+                                    <Label Content="Model - Number:"/>
+                                    <TextBox Text="{Binding Path=ModelNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........BuildTimeStamp-->
+                                    <Label Content="Firmware thương mại cần nạp - Build Time Stamp:"/>
+                                    <TextBox Text="{Binding Path=BuildTimeStamp, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........WifiFindTimeOut-->
+                                    <Label Content="Wifi Find SSID TimeOut (sec):"/>
+                                    <TextBox Text="{Binding Path=TimeoutFindSSID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........WifiConnectionTimeOut-->
+                                    <Label Content="Wifi Connection TimeOut (sec):"/>
+                                    <TextBox Text="{Binding Path=WifiConnectionTimeOut, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                    <!--..........Option-->
+                                    <!--<CheckBox Checked="Ckb_writemanufacterer_Checked" Unchecked="Ckb_writemanufacterer_Unchecked" x:Name="ckb_writemanufacterer" IsChecked="{Binding Path=notVerifyFW, UpdateSourceTrigger=PropertyChanged}" Content="Chỉ ghi mã manufacturer, không verify các thông tin khác." />-->
+
+                                    <Label Margin="0,30,0,0"/>
+                                </StackPanel>
+                            </ScrollViewer>
+
+                            <Grid Grid.Row="1" Background="WhiteSmoke">
+                                <Button Style="{StaticResource button_save_setting}" x:Name="btnSave" Content="Lưu cài đặt" Click="btnSave_Click"/>
+                            </Grid>
+
+                        </Grid>
+                    </TabItem>
+
+                    <!--TAB HELP-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel>
+                                <TextBlock FontSize="25" FontWeight="SemiBold" Text="HELP"/>
+                            </StackPanel>
+                        </TabItem.Header>
+
+                        <Grid Background="White">
+                            <DocumentViewer Margin="5,0,5,0" x:Name="docViewer"></DocumentViewer>
+                        </Grid>
+                    </TabItem>
+
+                    <!--TAB ABOUT-->
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel>
+                                <TextBlock FontSize="25" FontWeight="SemiBold" Text="ABOUT"/>
+                            </StackPanel>
+                        </TabItem.Header>
+
+                        <Grid Background="White">
+                            <ScrollViewer Margin="5,5,5,5">
+                                <StackPanel Margin="0,0,5,0">
+                                    <Label FontSize="17" FontWeight="SemiBold" Content="Lịch sử sửa đổi"></Label>
+                                    <DataGrid x:Name="GridAbout" Background="Transparent"
+                                              CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False"
+                                              CanUserResizeRows="False" CanUserSortColumns="False">
+                                    </DataGrid>
+                                    <Label></Label>
+                                    <Label FontSize="17" FontWeight="SemiBold" Content="Thông tin về phần mềm"></Label>
+                                    <Label></Label>
+                                    <Label>Bản quyền năm 2021 của VNPT Technology</Label>
+                                    <Label>Phần mềm được phát triển bởi nhóm hỗ trợ sản xuất - TTCN.</Label>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+
+                </TabControl>
+            </Grid>
+
+            <Grid Grid.Row="3">
+
+            </Grid>
+
+
+
+        </Grid>
+    </Border>
+</Window>
